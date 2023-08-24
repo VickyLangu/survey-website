@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Switch,
+} from "react-router-dom";
+import ReactDOM from "react-dom/client";
+import Header from "./components/Header";
+import Dashboard from "./components/Dashboard";
+import Create from "./components/Create";
+import Questionnaire from "./components/Questionnaire";
 
-function App() {
+const App = () => {
+  const dashboard = () => {
+    console.log();
+  };
+  const questions = () => {
+    console.log();
+  };
+  const list = () => {
+    console.log();
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/questionnaire" element={<Questionnaire />} />
+        <Route path="/create" element={<Create />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
