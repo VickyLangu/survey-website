@@ -1,28 +1,17 @@
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-// const Dashboard = ({ responses }) => {
-//   const countResponses = () => {
-//     const counts = {
-//       Agree: 0,
-//       Neutral: 0,
-//       Disagree: 0,
-//     };
-
-//     responses.forEach((response) => {
-
 const Dashboard = ({ responses }) => {
-  const [responseData, setResponseData] = React.useState([]);
+  const [responseData, setResponseData] = useState([]);
 
-  // Fetch the responses data from the JSON server
-  React.useEffect(() => {
-    fetch("http://localhost:3000/responses")
+  useEffect(() => {
+    fetch("http://localhost:5000/responses")
       .then((response) => response.json())
-      .then((data) => setResponseData(data));
+      .then((data) => setResponseData(data))
+      .catch((error) => console.error("Error fetching data: ", error));
   }, []);
 
-  // Calculate and display the data
   const countResponses = () => {
     const counts = {
       Agree: 0,
@@ -31,7 +20,15 @@ const Dashboard = ({ responses }) => {
     };
 
     responseData.forEach((response) => {
-      counts[response] += 1;
+      response.responses.forEach((value) => {
+        if (value === "Agree") {
+          counts.Agree += 1;
+        } else if (value === "Neutral") {
+          counts.Neutral += 1;
+        } else if (value === "Disagree") {
+          counts.Disagree += 1;
+        }
+      });
     });
 
     return counts;
@@ -40,7 +37,7 @@ const Dashboard = ({ responses }) => {
   const responseCounts = countResponses();
 
   return (
-    <div>
+    <div className="data-table">
       <h1>Dashboard</h1>
       <table>
         <thead>

@@ -133,3 +133,16 @@
   padding: 7px;
   font-weight: bold;
 }
+.data-table {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(155, 120, 120);
+  font-size: 50px;
+}
+table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

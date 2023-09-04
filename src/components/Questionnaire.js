@@ -2,14 +2,6 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 
 const Questionnaire = () => {
-  // const questions = [
-  //   "The computer is the invention of the century",
-  //   "The computer is the invention of the century",
-  //   "The computer is the invention of the century",
-  //   "The computer is the invention of the century",
-  //   // ... more questions
-  // ];
-
   const [responses, setResponses] = useState(Array(4).fill("")); // Initial responses array
 
   const handleRadioChange = (index, value) => {
@@ -17,20 +9,6 @@ const Questionnaire = () => {
     updatedResponses[index] = value;
     setResponses(updatedResponses);
   };
-
-  // const onSubmit = (event) => {
-  //   event.preventDefault();
-
-  //   const responseJSON = {
-  //     question1: responses[0],
-  //     question2: responses[1],
-  //     // Add more questions as needed
-  //   };
-
-  //   // Log the JSON object or send it to your desired endpoint
-  //   console.log(JSON.stringify(responseJSON));
-  //   console.log(responses); // Log the selected responses
-  // };
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -42,7 +20,7 @@ const Questionnaire = () => {
 
     try {
       // Send a POST request to the JSON server to store the responses
-      await fetch("http://localhost:3001/responses", {
+      await fetch("http://localhost:5000/responses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +44,10 @@ const Questionnaire = () => {
 
         {/* Question 1 */}
         <div className="question-label">
-          <label htmlFor="question1-agree">Question 1</label> <h3>Agree</h3>
+          <label htmlFor="question1-agree">
+            The computer is the invention of the century
+          </label>{" "}
+          <h3>Agree</h3>
           <input
             type="radio"
             id="question1-agree"
@@ -100,7 +81,10 @@ const Questionnaire = () => {
 
         {/* Question 2 */}
         <div className="question-label">
-          <label htmlFor="question2-agree">Question 2</label> <h3>Agree</h3>
+          <label htmlFor="question2-agree">
+            The computer is the invention of the century
+          </label>{" "}
+          <h3>Agree</h3>
           <input
             type="radio"
             id="question2-agree"
@@ -131,16 +115,80 @@ const Questionnaire = () => {
             className="input"
           />
         </div>
+        {/* Question 3 */}
+        <div className="question-label">
+          <label htmlFor="question3-agree">
+            The computer is the invention of the century
+          </label>{" "}
+          <h3>Agree</h3>
+          <input
+            type="radio"
+            id="question3-agree"
+            name="question3"
+            value="Agree"
+            checked={responses[2] === "Agree"}
+            onChange={() => handleRadioChange(2, "Agree")}
+            className="input"
+          />
+          <h3>Neutral</h3>
+          <input
+            type="radio"
+            id="question3-neutral"
+            name="question3"
+            value="Neutral"
+            checked={responses[2] === "Neutral"}
+            onChange={() => handleRadioChange(2, "Neutral")}
+            className="input"
+          />
+          <h3> Disagree</h3>
+          <input
+            type="radio"
+            id="question3-disagree"
+            name="question3"
+            value="Disagree"
+            checked={responses[2] === "Disagree"}
+            onChange={() => handleRadioChange(2, "Disagree")}
+            className="input"
+          />
+        </div>
+        {/* Question 4 */}
+        <div className="question-label">
+          <label htmlFor="question1-agree">
+            The computer is the invention of the century
+          </label>{" "}
+          <h3>Agree</h3>
+          <input
+            type="radio"
+            id="question4-agree"
+            name="question4"
+            value="Agree"
+            checked={responses[3] === "Agree"}
+            onChange={() => handleRadioChange(3, "Agree")}
+            className="input"
+          />
+          <h3>Neutral</h3>
+          <input
+            type="radio"
+            id="question4-neutral"
+            name="question4"
+            value="Neutral"
+            checked={responses[3] === "Neutral"}
+            onChange={() => handleRadioChange(3, "Neutral")}
+            className="input"
+          />
+          <h3> Disagree</h3>
+          <input
+            type="radio"
+            id="question4-disagree"
+            name="question4"
+            value="Disagree"
+            checked={responses[3] === "Disagree"}
+            onChange={() => handleRadioChange(3, "Disagree")}
+            className="input"
+          />
+        </div>
 
-        {/* Add more questions in a similar manner */}
-        <input
-          type="submit"
-          value="question-submit"
-          className="submit-button"
-        />
-        {/* <button type="submit" className="submit-button">
-          Submit
-        </button> */}
+        <input type="submit" value="Submit" />
       </form>
     </div>
   );
