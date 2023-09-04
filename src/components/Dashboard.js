@@ -4,12 +4,18 @@ import PropTypes from "prop-types";
 
 const Dashboard = ({ responses }) => {
   const [responseData, setResponseData] = useState([]);
+  const [questionData, setQuestionData] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5000/responses")
       .then((response) => response.json())
       .then((data) => setResponseData(data))
       .catch((error) => console.error("Error fetching data: ", error));
+
+    fetch("http://localhost:5000/questions") // Fetch questions data
+      .then((response) => response.json())
+      .then((data) => setQuestionData(data))
+      .catch((error) => console.error("Error fetching question data: ", error));
   }, []);
 
   const countResponses = () => {
@@ -34,30 +40,55 @@ const Dashboard = ({ responses }) => {
     return counts;
   };
 
+  const countQuestions = () => {
+    return questionData.length; // Return the number of questions
+  };
+
   const responseCounts = countResponses();
+  const questionCounts = countQuestions();
 
   return (
     <div className="data-table">
-      <h1>Dashboard</h1>
+      <h1 className="table-h1">Dashboard</h1>
       <table>
-        <thead>
-          <tr>
+        {/* <thead>
+          {/* <tr>
             <th>Response Type</th>
-            <th>Count</th>
-          </tr>
-        </thead>
+            <tr>
+              <th>Number of Questions</th>
+            </tr>
+            {/* Add a new column for question counts 
+          </tr> 
+        </thead> */}
         <tbody>
-          <tr>
-            <td>Agree</td>
-            <td>{responseCounts.Agree}</td>
+          <tr className="row">
+            <td>
+              Agree <br /> {responseCounts.Agree}
+            </td>
+
+            {/* <td>{questionCounts.Agree}</td> Display question counts */}
+
+            {/* <tr className="row"> */}
+            <td>
+              Neutral
+              <br /> {responseCounts.Neutral}
+            </td>
+
+            {/* <td>{questionCounts.Neutral}</td> Display question counts */}
+            {/* </tr>
+          <tr className="row"> */}
+            <td>
+              Disagree <br /> {responseCounts.Disagree}
+            </td>
+
+            {/* <td>{questionCounts.Disagree}</td> Display question counts */}
           </tr>
-          <tr>
-            <td>Neutral</td>
-            <td>{responseCounts.Neutral}</td>
-          </tr>
-          <tr>
-            <td>Disagree</td>
-            <td>{responseCounts.Disagree}</td>
+
+          <tr className="row">
+            {" "}
+            <td>
+              Questions <br /> {questionCounts}{" "}
+            </td>
           </tr>
         </tbody>
       </table>

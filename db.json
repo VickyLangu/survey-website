@@ -17,6 +17,48 @@
         "Disagree"
       ],
       "id": 9
+    },
+    {
+      "responses": [
+        "Disagree",
+        "Disagree",
+        "Agree",
+        "Neutral",
+        "Agree"
+      ],
+      "id": 10
+    }
+  ],
+  "questions": [
+    {
+      "questions": [
+        "The computer is the invention of the century"
+      ],
+      "id": 1
+    },
+    {
+      "questions": [
+        "The computer is the invention of the century"
+      ],
+      "id": 2
+    },
+    {
+      "questions": [
+        "The computer is the invention of the century"
+      ],
+      "id": 3
+    },
+    {
+      "questions": [
+        "The computer is the invention of the century"
+      ],
+      "id": 6
+    },
+    {
+      "questions": [
+        "Do you like the colour Red?"
+      ],
+      "id": 7
     }
   ]
 }
