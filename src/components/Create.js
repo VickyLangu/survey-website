@@ -1,12 +1,20 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 
 const Create = (props) => {
-  const [questions, setQuestions] = useState([""]); // Initial questions array
+  const [questions, setQuestions] = useState([]); // Initial questions array
   const [newQuestion, setNewQuestion] = useState("");
+
+  useEffect(() => {
+    // Fetch questions from the database
+    fetch("http://localhost:5000/questions")
+      .then((response) => response.json())
+      .then((data) => setQuestions(data))
+      .catch((error) => console.error("Error fetching questions: ", error));
+  }, []);
 
   const handleQuestionChange = (index, value) => {
     const updatedQuestions = [...questions];
@@ -80,8 +88,37 @@ const Create = (props) => {
             </div>
           ))}
           <input type="submit" value="Submit" className="submit-btn" />
-          <h1 className="content-list">List of Questions</h1>{" "}
         </form>
+        <div className="questionnaire-form">
+          <div>
+            <h1 className="content-list">List of Questions</h1>
+          </div>
+          <form>
+            {questions.map((questionObj, index) => (
+              <div className="question-label" key={index}>
+                {questionObj.questions && questionObj.questions[0] && (
+                  <label
+                    htmlFor={`question${index + 1}-agree`}
+                    className="form-create"
+                  >
+                    {questionObj.questions[0]}
+
+                    <FaPencilAlt
+                      style={{ color: "black", cursor: "pointer" }}
+                      className="icons"
+                      // onClick={toggleEditing}
+                    />
+                    <FaTrashAlt
+                      style={{ color: "black", cursor: "pointer" }}
+                      className="icons"
+                      onClick={() => removeQuestion(index)}
+                    />
+                  </label>
+                )}
+              </div>
+            ))}
+          </form>
+        </div>
       </div>
     </div>
   );
