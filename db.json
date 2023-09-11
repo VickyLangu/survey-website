@@ -32,7 +32,7 @@
   "questions": [
     {
       "questions": [
-        "The computer is the invention of the century"
+        "The computer is the invention of the century  by langu"
       ],
       "id": 0
     },
@@ -47,12 +47,6 @@
         "The computer is the invention of the century"
       ],
       "id": 2
-    },
-    {
-      "questions": [
-        "How are you today?"
-      ],
-      "id": 3
     }
   ]
 }

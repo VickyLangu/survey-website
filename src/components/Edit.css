@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.Edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh;
+  background-color: #f0f0f0; */
+  /* font-family: Arial, sans-serif; */
+}
+
+.edit-list {
+  list-style-type: none;
+  padding: 0;
+  width: 500px;
+}
+
+.Edit-input {
+  background-color: blanchedalmond;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.edit-input-container {
+  display: flex;
+  align-items: center;
+}
+
+.edit-input-field {
+  flex: 1;
+  /* margin-right: 10px; */
+  padding: 2px;
+  width: 500px;
+  border: none;
+  background-color: blanchedalmond;
+  font-weight: bold;
+}
+
+.edit-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.save-button {
+  background-color: #28a745;
+}
+
+.cancel-button {
+  background-color: #dc3545;
+}
+
+.edit-display {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.edit-icon {
+  color: #000;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}

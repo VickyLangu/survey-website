@@ -1,35 +1,22 @@
 import PropTypes from "prop-types";
+import EditQuestion from "./EditQuestion";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { FaTrashAlt } from "react-icons/fa";
-import { FaPencilAlt } from "react-icons/fa";
+import "./Edit.css";
 
 const Create = (props) => {
   const [questions, setQuestions] = useState([]); // Initial questions array
   const [newQuestion, setNewQuestion] = useState("");
-
-  useEffect(() => {
-    // Fetch questions from the database
-    fetch("http://localhost:5000/questions")
-      .then((response) => response.json())
-      .then((data) => setQuestions(data))
-      .catch((error) => console.error("Error fetching questions: ", error));
-  }, []);
+  const [editedQuestion, setEditedQuestion] = useState(null);
 
   const handleQuestionChange = (index, value) => {
     const updatedQuestions = [...questions];
     updatedQuestions[index] = value;
     setQuestions(updatedQuestions);
+    setEditedQuestion(null);
   };
 
   const addQuestion = () => {
     setQuestions([...questions, ""]);
-  };
-
-  const removeQuestion = (index) => {
-    const updatedQuestions = [...questions];
-    updatedQuestions.splice(index, 1);
-    setQuestions(updatedQuestions);
   };
 
   const onSubmit = async (event) => {
@@ -75,16 +62,6 @@ const Create = (props) => {
                 placeholder="Enter your question"
                 className="form-create"
               />
-              <FaPencilAlt
-                style={{ color: "black", cursor: "pointer" }}
-                className="icons"
-                // onClick={toggleEditing}
-              />
-              <FaTrashAlt
-                style={{ color: "black", cursor: "pointer" }}
-                className="icons"
-                onClick={() => removeQuestion(index)}
-              />
             </div>
           ))}
           <input type="submit" value="Submit" className="submit-btn" />
@@ -93,31 +70,7 @@ const Create = (props) => {
           <div>
             <h1 className="content-list">List of Questions</h1>
           </div>
-          <form>
-            {questions.map((questionObj, index) => (
-              <div className="question-label" key={index}>
-                {questionObj.questions && questionObj.questions[0] && (
-                  <label
-                    htmlFor={`question${index + 1}-agree`}
-                    className="form-create"
-                  >
-                    {questionObj.questions[0]}
-
-                    <FaPencilAlt
-                      style={{ color: "black", cursor: "pointer" }}
-                      className="icons"
-                      // onClick={toggleEditing}
-                    />
-                    <FaTrashAlt
-                      style={{ color: "black", cursor: "pointer" }}
-                      className="icons"
-                      onClick={() => removeQuestion(index)}
-                    />
-                  </label>
-                )}
-              </div>
-            ))}
-          </form>
+          <EditQuestion />
         </div>
       </div>
     </div>
